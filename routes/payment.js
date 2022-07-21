@@ -10,7 +10,7 @@ const Resource = require('../models/resource');
 
 router.route('/')
     .get(catchAsync(payment.index))
-    .post(isLoggedIn, upload.single('resource[image]') ,catchAsync(resources.createResource))
+    .post(isLoggedIn, upload.single('resource[image]') ,catchAsync(payment.createResource))
 
 module.exports = router;
 
