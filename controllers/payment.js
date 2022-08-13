@@ -23,24 +23,15 @@ module.exports.index = async (req, res) => {
                 rid : refId
             }
         })
-        console.log('response',response.data);
-    
+
         const result = response.data.replace(/<[^>]+>/g, '');
-        console.log(result.trim());
         if(result.trim() === 'Success'){
             let userData = await User.findById(req.params.id);
             userData.bought_resource.push(oid);
             userData.save();
-            console.log(userData);
             req.flash('success', 'Successfully Bought the resource!');
-            res.redirect(`/resources`);
+            res.redirect(`/resources/${oid}`);
         }
-
-
-        // if(response === 'su')
-
-    // const resources = await Resource.find({});
-    // res.render('resources/index', { resources })
 }
 
 

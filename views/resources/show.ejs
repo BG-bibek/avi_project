@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-6">
         <div class="card mb-3">
-            <img src="<%= resource.avatar%>" class="card-img-top" alt="...">
+            <img src="<%= resource.thumbnail%>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><%= resource.title%></h5>
                 <p class="card-text"><%= resource.description%></p>
@@ -17,8 +17,9 @@
                 <% let boughtItems = currentUser?.bought_resource %>
                 <% if( boughtItems.length != 0 &&  boughtItems.includes(resource._id)) { %>
                    <div>
-                    <form action=""></form>
+                    <a href="<%= resource.avatar %>">
                        <button>Download Resource Button</button>
+                       </a>
                    </div>
                     <%} else{%>
                 <div>

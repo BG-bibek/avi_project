@@ -7,6 +7,7 @@ const ResourceSchema = new Schema({
     price: Number,
     description: String,
     avatar: String,
+    thumbnail: String,
     cloudinary_id: String,
     author: {
         type: Schema.Types.ObjectId,

@@ -12,14 +12,16 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createResource = async (req, res, next) => {
     try{
-        console.log(req.file?.path);
         const result = await cloudinary.uploader.upload(req.file.path);
+        let thumbnail = result.secure_url.split('.');
+        thumbnail.pop();
+        thumbnail.push('jpg');
         const resourcePayload = {
          ...req.body.resource,
          avatar: result.secure_url,
-        cloudinary_id: result.public_id
+        cloudinary_id: result.public_id,
+        thumbnail : thumbnail.join('.')
         }
-        console.log(resourcePayload);
         const resource = new Resource(resourcePayload);
         resource.author = req.user._id;
         await resource.save();
