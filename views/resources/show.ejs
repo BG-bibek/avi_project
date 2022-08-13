@@ -12,6 +12,15 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Submitted by <%= resource.author.username%></li>
                 <li class="list-group-item">$<%= resource.price%>
+
+                    <% if(currentUser) { %>                  
+                <% let boughtItems = currentUser?.bought_resource %>
+                <% if( boughtItems.length != 0 &&  boughtItems.includes(resource._id)) { %>
+                   <div>
+                    <form action=""></form>
+                       <button>Download Resource Button</button>
+                   </div>
+                    <%} else{%>
                 <div>
                     <form action="https://uat.esewa.com.np/epay/main" method="POST">
                         <input value="<%= resource.price%>" name="tAmt" type="hidden">
@@ -22,21 +31,15 @@
                         <input value="EPAYTEST" name="scd" type="hidden">
                         <input value="<%= resource._id %>" name="pid" type="hidden">
                         <!-- <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su"> -->
-                        <input value="http://localhost:3000/payment" type="hidden" name="su">
+                        <input value="http://localhost:3000/payment/<%=currentUser._id%>" type="hidden" name="su">
                         <!-- <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu"> -->
                         <input value="http://localhost:3000/resources/<%=resource._id%>" type="hidden" name="fu"> 
                         <input value="Buy Now" type="submit">
                     </form>
                 </div>
-                <div>
-                     <form action="https://uat.esewa.com.np/epay/transrec" method="GET">
-                        <input value="<%= resource.price%>" name="amt" type="hidden">
-                        <input value="EPAYTEST" name="scd" type="hidden">
-                        <input value="<%= resource._id %>" name="pid" type="hidden">
-                        <input value="00048A1" name="rid" type="hidden">
-                        <input value="Submit" type="submit">
-                    </form>
-                </div>
+                <%} }%>
+             
+
                 </li>
             </ul>
             <%  if( currentUser && resource.author.equals(currentUser._id))  {%>

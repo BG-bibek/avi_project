@@ -8,9 +8,8 @@ const upload = require("../helper/multer");
 
 const Resource = require('../models/resource');
 
-router.route('/')
+router.route('/:id')
     .get(catchAsync(payment.index))
-    .post(isLoggedIn, upload.single('resource[image]') ,catchAsync(payment.createResource))
 
 module.exports = router;
 

@@ -7,6 +7,9 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true
+    },
+    bought_resource: {
+        type: [String]
     }
 });
 
